@@ -13,6 +13,12 @@
 |
 */
 
+$router->get('/pricesigns', 'PricesignController@index');
+$router->get('/pricesigns/{id}', 'PricesignController@show');
+$router->post('/pricesigns/create', 'PricesignController@store');
+$router->put('/pricesigns/update/{id}', 'PricesignController@index');
+$router->delete('/pricesigns/destroy/{id}', 'PricesignController@index');
+
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
