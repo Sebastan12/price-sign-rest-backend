@@ -74,16 +74,18 @@ class PricesignController extends Controller
         //image upload
         if($request->hasFile('photo')){
             $file = $request->file('photo');
-            $allowedfileextensions = ['png', 'jpg', 'jpeg'];
+            $allowedfileextensions = ['png', 'jpg', 'jpeg', 'PNG'];
             $extension = $file->getClientOriginalExtension();
             $check = in_array($extension, $allowedfileextensions);
 
             if($check){
                 $name = time() . $file->getClientOriginalName();
                 $file->move('images', $name);
+                unlink("images/".$pricesign->photo);
                 $pricesign->photo = $name;
             }
         }
+
 
         $pricesign->title = $request->input('title');
         $pricesign->articlenumber = $request->input('articlenumber');
@@ -98,6 +100,7 @@ class PricesignController extends Controller
     public function destroy($id)
     {
         $pricesign = Pricesign::find($id);
+        unlink("images/".$pricesign->photo);
         $pricesign->delete();
         return response()->json('Product Deleted Sucessfully');
     }
