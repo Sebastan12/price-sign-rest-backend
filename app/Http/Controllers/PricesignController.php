@@ -30,7 +30,7 @@ class PricesignController extends Controller
         //image upload
         if($request->hasFile('photo')){
             $file = $request->file('photo');
-            $allowedfileextensions = ['png', 'jpg', 'jpeg'];
+            $allowedfileextensions = ['png', 'jpg', 'jpeg', 'PNG', 'JPEG'];
             $extension = $file->getClientOriginalExtension();
             $check = in_array($extension, $allowedfileextensions);
 
